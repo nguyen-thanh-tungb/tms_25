@@ -1,17 +1,18 @@
-<%= form_for [:supervisor, @course]  do |f| %>
+
+<%= simple_form_for [:supervisor, @course]  do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
-  
-  <%= f.label :name %>
-  <%= f.text_field :name, class: 'form-control' %>
 
-  <%= f.label :instruction %>
-  <%= f.text_area :instruction, class: 'form-control' %>
+  <%#= f.input :title %>
+  <%= f.input :name, :label => "Enter course's name" %>
+  <%= f.input :instruction, :label => "Enter course's intruction" %>
 
-  <%= f.label :start_date %>
-  <%= f.datetime_field :start_date, class: 'form-control' %>
-
-  <%= f.label :end_date %>
-  <%= f.datetime_field :end_date, class: 'form-control' %>
-
-  <%= f.submit "Submit", class: "btn btn-primary" %>
+  <%= f.simple_fields_for :subject_courses do |fa| %>
+    <%#= fa = fa.object.name.titleize %>
+    <%= fa.input :course_id, as: :hidden %>
+    <%= fa.input :subject_id, as: :hidden %>
+    <%= fa.simple_fields_for :subjects do |subject_form| %>
+      <%= subject_form.association :subjects, :as => :check_boxes %>
+    <% end %>
+  <% end %>
+  <%= f.button :submit %>
 <% end  %>

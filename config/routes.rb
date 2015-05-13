@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :users
     resources :subjects
     resources :courses
+    resources  :subject_courses
     root  'users#index'
   end
 end

@@ -1,0 +1,10 @@
+<%= form_for [:supervisor,@subject_course] do |f| %>
+  <%= @course = Course.find params[:id] %>
+  <%= @subjects = Subject.all %>
+
+  <%= @subjects.each do |subject| %>
+    <%= f.check_box :i, {:checked=>false} %><%= render subject %>
+  <% end %>
+  <%= f.hidden_field :course_id, value: @course.id %>
+  <%= f.submit "Submit" %>
+<% end %>

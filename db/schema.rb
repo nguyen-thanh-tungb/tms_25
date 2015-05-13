@@ -31,6 +31,10 @@ ActiveRecord::Schema.define(version: 20150512092721) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "subject_courses", ["course_id"], name: "index_subject_courses_on_course_id"
+  add_index "subject_courses", ["subject_id", "course_id"], name: "index_subject_courses_on_subject_id_and_course_id", unique: true
+  add_index "subject_courses", ["subject_id"], name: "index_subject_courses_on_subject_id"
+
   create_table "subjects", force: :cascade do |t|
     t.string   "name"
     t.text     "instruction"

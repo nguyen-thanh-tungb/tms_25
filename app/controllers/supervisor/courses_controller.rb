@@ -8,6 +8,7 @@ class Supervisor::CoursesController < ApplicationController
   end
 
   def create
+    byebug
     @course = Course.new course_params
     if @course.save
       flash[:success] = t(:course_created)
@@ -19,6 +20,7 @@ class Supervisor::CoursesController < ApplicationController
 
   def show
     @course = Course.find params[:id]
+    # @structure = @course.structure.paginate page: params[:page], per_page: 10
   end
 
   def edit
@@ -40,7 +42,7 @@ class Supervisor::CoursesController < ApplicationController
   
   private
   def course_params
-    params.require(:course).permit :name, :instruction
+    params.require(:course).permit :name, :instruction, subjects_attributes: [:name]
   end
   
 end
